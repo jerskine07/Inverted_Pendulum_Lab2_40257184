@@ -22,7 +22,7 @@ phi = 4*m*ell*x4**2 * sm.sin(x3) + 4*F - 3*m*g*sm.sin(x3)*sm.cos(x3)
 phi /= 4*(M+m) - 3*m*sm.cos(x3)**2
 
 # define psi
-psi = -3*(4*m*ell*x4**2 * sm.sin(x3) * sm.cos(x3) + F*sm.cos(x3) - (M + m)*g*sm.sin(x3))
+psi = (-3)*(4*m*ell*x4**2 * sm.sin(x3) * sm.cos(x3) + F*sm.cos(x3) - (M + m)*g*sm.sin(x3))
 psi /= (4*(M + m) - 3*m*sm.cos(x3)**2)* ell
 
 # differentiation of phi
@@ -39,7 +39,7 @@ dpsi_x4 = psi.diff(x4)
 def evaluate_at_equilibrium(f):
     return f.subs(([F,0], [x3,0], [x4,0]))
 
-# Simplification using substitued values
+# Simplification using substituted values
 dphi_F_eq = evaluate_at_equilibrium(phi.diff(F))
 dphi_x3_eq = evaluate_at_equilibrium(phi.diff(x3))
 dphi_x4_eq = evaluate_at_equilibrium(phi.diff(x4))
@@ -73,10 +73,10 @@ b_value = float(b.subs([(M, M_value), (m, m_value), (g, g_value)]))
 c_value = float(c.subs([(M, M_value), (m, m_value), (g, g_value), (ell, ell_value)]))
 d_value = float(d.subs([(M, M_value), (m, m_value), (g, g_value), (ell, ell_value)]))
 
-# Define symbols to store the partial derivatives as coefficients
+# Define symbols
 a, b, c, d = sm.symbols('a:d', real=True, positive=True)
 
-# Define the transfer functions G_theta and G_x
+# Transfer functions G_theta and G_x
 G_theta = c / (d - s ** 2)
 G_x = (a * d - a * s ** 2 - b * c) / (d * s ** 2 - s ** 4)
 
@@ -85,7 +85,7 @@ F_s_impulse = 1
 F_s_step = 1 / s
 F_s_frequency = w / (s ** 2 + w ** 2)
 
-# Define the impulse, step, and frequency responses for X3_s and X1_s (s domain)
+# Definition in s domain
 X3_s_impulse = G_theta * F_s_impulse
 X3_s_step = G_theta * F_s_step
 X3_s_frequency = G_theta * F_s_frequency
@@ -93,7 +93,7 @@ X1_s_impulse = G_x * F_s_impulse
 X1_s_step = G_x * F_s_step
 X1_s_frequency = G_x * F_s_frequency
 
-# Define the impulse, step, and frequency responses for x3_t and x1_t (t domain)
+# Definition in t domain
 x3_t_impulse = ilt(X3_s_impulse, s, t).simplify()
 x3_t_step = ilt(X3_s_step, s, t).simplify()
 x3_t_frequency = ilt(X3_s_frequency, s, t, w).simplify()
@@ -101,7 +101,7 @@ x1_t_impulse = ilt(X1_s_impulse, s, t).simplify()
 x1_t_step = ilt(X1_s_step, s, t).simplify()
 x1_t_frequency = ilt(X1_s_frequency, s, t, w).simplify()
 
-# Pretty print all of the calculated responses in the t domain
+# Printing of results
 print('\n x3 t impulse')
 sm.pprint(x3_t_impulse)
 print('\n x3 t step')

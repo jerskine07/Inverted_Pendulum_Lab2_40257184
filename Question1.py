@@ -17,7 +17,7 @@ phi = 4*m*ell*x4**2 * sm.sin(x3) + 4*F - 3*m*g*sm.sin(x3)*sm.cos(x3)
 phi /= 4*(M+m) - 3*m*sm.cos(x3)**2
 
 # define psi
-psi = -3*(4*m*ell*x4**2 * sm.sin(x3) * sm.cos(x3) + F*sm.cos(x3) - (M + m)*g*sm.sin(x3))
+psi = (-3)*(4*m*ell*x4**2 * sm.sin(x3) * sm.cos(x3) + F*sm.cos(x3) - (M + m)*g*sm.sin(x3))
 psi /= (4*(M + m) - 3*m*sm.cos(x3)**2)* ell
 
 # differentiation of phi
@@ -34,7 +34,7 @@ dpsi_x4 = psi.diff(x4)
 def evaluate_at_equilibrium(f):
     return f.subs(([F,0], [x3,0], [x4,0]))
 
-# Simplification using substitued values
+# Simplification using substituted values
 dphi_F_eq = evaluate_at_equilibrium(phi.diff(F))
 dphi_x3_eq = evaluate_at_equilibrium(phi.diff(x3))
 dphi_x4_eq = evaluate_at_equilibrium(phi.diff(x4))
