@@ -121,10 +121,6 @@ G_x_denom_coeffs = [-1, 0, d_value, 0, 0]
 G_theta = Tf(G_theta_num_coeffs, G_theta_denom_coeffs)
 G_x = Tf(G_x_num_coeffs, G_x_denom_coeffs)
 
-# Response of the System
-G_theta_t_out, G_theta_y_out, G_theta_x_out = ctrl.forced_response( G_theta, t_span, input_signal)
-G_x_t_out, G_x_y_out, G_x_x_out = ctrl.forced_response(G_x, t_span, input_signal)
-
 def pid(kp, ki, kd):
     diff = Tf([1, 0], 1)
     intgr = Tf(1, [1, 0])
